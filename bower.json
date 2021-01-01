@@ -1,0 +1,17 @@
+{
+  "name": "chatozi",
+  "description": "",
+  "main": "",
+  "authors": [
+    "Oğuzcan ÖZDEMİR <ce.oguzcan.ozdemir@gmail.com>"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "chat",
+    "nodejs"
+  ],
+  "homepage": "https://github.com/ogzcnozdmr/chatozi",
+  "dependencies": {
+    "angular": "^1.8.2"
+  }
+}
