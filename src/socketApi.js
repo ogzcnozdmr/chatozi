@@ -6,6 +6,9 @@ const socketApi = {
     io: io
 };
 
+//libs
+const Users = require('./lib/Users');
+
 //socket authorization
 io.use(socketAuthorization);
 
@@ -20,9 +23,9 @@ io.adapter(redisAdapter({
 }));
 
 io.on('connection', socket => {
-   console.log('a user logged in with name'+socket.request.user.name);
-
-   socket.broadcast.emit('hello');
+    console.log('a user logged in with name'+socket.request.user.name);
+    Users.upsert(socket.id, socket.request.user);
+   //socket.broadcast.emit('hello');
 });
 
 module.exports = socketApi;
