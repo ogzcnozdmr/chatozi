@@ -43,6 +43,10 @@ io.on('connection', socket => {
         });
     });
 
+    socket.on('newMessage', data => {
+       console.log(data);
+    });
+
     socket.on('disconnect', () => {
         Users.remove(socket.request.user.googleId);
 
