@@ -5,7 +5,7 @@ function Users(){
         host: process.env.REDIS_URI,
         port: process.env.REDIS_PORT
     });
-}
+};
 
 module.exports = new Users();
 
@@ -23,7 +23,7 @@ Users.prototype.upsert = function (connectionId, meta){
               console.log(err);
       }
     );
-}
+};
 
 Users.prototype.remove = function (googleId){
     this.client.hdel(
@@ -34,4 +34,23 @@ Users.prototype.remove = function (googleId){
                 console.log(err);
         }
     );
-}
+};
+
+Users.prototype.list = function(callback) {
+    let active = [];
+    this.client.hgetall(
+      'online',
+      function (err, users) {
+          if(err){
+              console.log(err);
+              return callback([]);
+          }
+
+          for (let user in users){
+              active.push(JSON.parse(users[user]));
+          }
+
+          return callback(active);
+      }
+  )
+};
