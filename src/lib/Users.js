@@ -24,3 +24,14 @@ Users.prototype.upsert = function (connectionId, meta){
       }
     );
 }
+
+Users.prototype.remove = function (googleId){
+    this.client.hdel(
+        'online',
+        googleId,
+        err => {
+            if(err)
+                console.log(err);
+        }
+    );
+}
