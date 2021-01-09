@@ -1,4 +1,5 @@
 app.controller('chatController', ['$scope', ($scope) => {
+    $scope.onlineList = [];
     $scope.activeTab = 2;
 
     $scope.changeTab = tab => {
@@ -7,7 +8,8 @@ app.controller('chatController', ['$scope', ($scope) => {
 
     const socket = io.connect("http://localhost:3000");
 
-    /*socket.on('hello', () => {
-        console.log('hello');
-    });*/
+    socket.on('onlineList', (users) => {
+        $scope.onlineList = users;
+        $scope.$apply();
+    });
 }]);
