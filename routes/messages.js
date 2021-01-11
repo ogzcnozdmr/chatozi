@@ -8,7 +8,6 @@ router.get('/list', (req, res, next) => {
     Messages.list('@Room:eQ5nBVwgv', messages => {
         res.json(messages);
     });
-    //res.json({data:'@guzel'});
 });
 
 module.exports = router;
