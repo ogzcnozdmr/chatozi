@@ -15,6 +15,7 @@ app.controller('chatController', ['$scope', 'chatFactory', 'userFactory', ($scop
     $scope.roomList = [];
     $scope.activeTab = 1;
     $scope.chatClicked = false;
+    $scope.loadingMessages = false;
     $scope.roomId = '';
     $scope.chatName = '';
     $scope.chatMessage = '';
@@ -50,9 +51,13 @@ app.controller('chatController', ['$scope', 'chatFactory', 'userFactory', ($scop
     $scope.switchRoom = room => {
         $scope.chatName = room.name;
         $scope.roomId = room.id;
+
         $scope.chatClicked = true;
+        $scope.loadingMessages = true;
+
         chatFactory.getMessages(room.id).then(data => {
            $scope.messages[room.id] = data;
+            $scope.loadingMessages = false;
         });
     };
 
