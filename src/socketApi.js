@@ -45,12 +45,17 @@ io.on('connection', socket => {
     });
 
     socket.on('newMessage', data => {
-       Messages.upsert({
-           ...data,
-           userId: socket.request.user._id,
-           userName: socket.request.user.name,
-           userSurname: socket.request.user.surname
-       })
+
+        const messageData = {
+            ...data,
+            userId: socket.request.user._id,
+            userName: socket.request.user.name,
+            userSurname: socket.request.user.surname
+        };
+        console.log(messageData);
+        Messages.upsert(messageData);
+        socket.broadcast.emit('receiveMessage', messageData);
+
     });
 
     socket.on('disconnect', () => {
